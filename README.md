@@ -35,7 +35,18 @@ $ docker-compose down --rmi all --volumes
 $ docker-compose exec php bash
 
 ## Laravel install
-$ composer create-project laravel/laravel example-app
+$ composer create-project laravel/laravel project-name
+
+```バージョン指定
+Laravelの8.x系をインストールする
+composer create-project laravel/laravel project-name "8.*"
+
+Laravelの7.x系をインストールする
+composer create-project laravel/laravel project-name "7.*"
+
+Laravelの6.x系をインストールする
+composer create-project laravel/laravel project-name "6.*"
+```
 
 ## Laravel install後 パーミッション設定
 $ chmod -R 777 storage/ bootstrap/cache/
