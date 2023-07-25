@@ -1,4 +1,4 @@
-FROM php:7.4-fpm
+FROM php:8.2-fpm
 
 COPY php.ini /usr/local/etc/php/
 
@@ -6,7 +6,7 @@ RUN apt-get update \
   && apt-get install -y git unzip libzip-dev libicu-dev libonig-dev libpq-dev zlib1g-dev mariadb-client vim \
   && docker-php-ext-install intl pdo_mysql zip bcmath pdo_pgsql
 
-RUN pecl install xdebug && \
+RUN pecl install xdebug-3.2.1 && \
     docker-php-ext-enable xdebug
 
 #Composer install

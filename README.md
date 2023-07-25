@@ -9,15 +9,17 @@ docker-compose up -d --build
 # PHPコンテナに入る
 docker-compose exec php bash
 
-# パーミッション設定
-chmod -R 777 storage/ bootstrap/cache/
-
 # nodeコンテナに入る
 docker-compose exec node bash
 
 npm run dev
 (*エラー時 rm -rf node_modules rm package-lock.json)
 
+# http確認
+http://localhost:18888/
+
+# DB
+localhost 13306 root/root
 
 # MEMO
 ## コンテナ起動
@@ -34,3 +36,6 @@ $ docker-compose exec php bash
 
 ## Laravel install
 $ composer create-project laravel/laravel example-app
+
+## Laravel install後 パーミッション設定
+$ chmod -R 777 storage/ bootstrap/cache/
