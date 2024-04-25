@@ -3,11 +3,13 @@ version: '3'
 services:
   php:
     build: ./php
+    container_name: php
     volumes:
       - ./src:/var/www/html
 
   nginx:
     image: nginx
+    container_name: nginx
     ports:
       - 18888:80
     volumes:
@@ -16,38 +18,45 @@ services:
     depends_on:
       - php
 
-  db:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: app
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
-      TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    volumes:
-      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/sql:/docker-entrypoint-initdb.d
-    ports:
-      - 13306:3306
-#  db:
-#    image: postgres:14-bullseye
+#  mysql:
+#    build: ./mysql
+#    container_name: mysql
 #    environment:
-#      POSTGRES_USER: user
-#      POSTGRES_PASSWORD: password
-#      PGPASSWORD: root
-#      POSTGRES_DB: app
-#      PGDATA: /var/lib/postgresql/data/pgdata
-#      TZ: "Asia/Tokyo"
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: app
+#      MYSQL_USER: user
+#      MYSQL_PASSWORD: password
+#      TZ: 'Asia/Tokyo'
+#    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 #    ports:
-#      - 15432:5432
+#      - 13336:3306
 #    volumes:
-#      - ./db/data:/var/lib/postgresql/data
+#      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+#      - ./db/mysql:/var/lib/mysql
+#      - ./mysql/sql:/docker-entrypoint-initdb.d
+
+  postgres:
+    image: postgres:15-bullseye
+    container_name: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      PGPASSWORD: root
+      POSTGRES_DB: app
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: "Asia/Tokyo"
+    ports:
+      - 15432:5432
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data
 
   node:
     image: node:14.18-buster
+    container_name: node
     tty: true
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
+
+volumes:
+  db:

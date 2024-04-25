@@ -1,4 +1,18 @@
-# 以下Ubuntu20.04で動作確認
+# ディレクトリ構成
+
+app/
+  ├ docker-compose.yml
+  └ mysql
+    └ Dockerfile
+    └ my.cnf
+  └ nginx
+    └ default.conf
+  └ php
+    └ Dockerfile
+    └ php.ini
+  └ src
+
+# 以下Ubuntu22.04.3 LTSで動作確認
 
 # Docker起動
 sudo service docker start
@@ -19,7 +33,8 @@ npm run dev
 http://localhost:18888/
 
 # DB
-localhost 13306 root/root
+mysql localhost 13306 root/root
+pgsql localhost 15432 user/password
 
 # MEMO
 ## コンテナ起動
@@ -29,7 +44,7 @@ $ docker-compose up -d
 $ docker-compose down
 
 ## コンテナ、イメージ、ボリューム、ネットワークを一括完全消去
-$ docker-compose down --rmi all --volumes
+$ docker-compose down --rmi all --volumes --remove-orphans
 
 ## phpコンテナに接続する（コンテナ名を変えて他のコンテナに接続できる）
 $ docker-compose exec php bash
