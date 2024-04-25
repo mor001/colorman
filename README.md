@@ -33,8 +33,11 @@ npm run dev
 http://localhost:18888/
 
 # DB
-mysql localhost 13306 root/root
-pgsql localhost 15432 user/password
+```
+A5などのクライアントから接続する場合
+mysql localhost:13306 root/root
+pgsql localhost:15432 user/password
+```
 
 # MEMO
 ## コンテナ起動
@@ -49,19 +52,26 @@ $ docker-compose down --rmi all --volumes --remove-orphans
 ## phpコンテナに接続する（コンテナ名を変えて他のコンテナに接続できる）
 $ docker-compose exec php bash
 
-## Laravel install
-$ composer create-project laravel/laravel project-name
+## Laravel install（最新版がsrc以下にインストールされる）
+$ composer create-project laravel/laravel .
 
-```バージョン指定
+```バージョン指定する場合
+
 Laravelの8.x系をインストールする
-composer create-project laravel/laravel project-name "8.*"
+composer create-project laravel/laravel . "8.*"
 
 Laravelの7.x系をインストールする
-composer create-project laravel/laravel project-name "7.*"
+composer create-project laravel/laravel . "7.*"
 
 Laravelの6.x系をインストールする
-composer create-project laravel/laravel project-name "6.*"
+composer create-project laravel/laravel . "6.*"
 ```
 
 ## Laravel install後 パーミッション設定
 $ chmod -R 777 storage/ bootstrap/cache/
+
+## .env設定
+$ vi .env
+
+## migrate実行
+$ php artisan migrate
