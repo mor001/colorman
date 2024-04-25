@@ -1,5 +1,5 @@
 # ディレクトリ構成
-
+```
 app/
   ├ docker-compose.yml
   └ mysql
@@ -10,7 +10,7 @@ app/
   └ php
     └ Dockerfile
     └ php.ini
-  └ src
+```
 
 # 以下Ubuntu22.04.3 LTSで動作確認
 
